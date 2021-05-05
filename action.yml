@@ -1,0 +1,21 @@
+name: 'Jira release notes'
+description: 'Used to get release notes from Jira versions'
+inputs:
+  projects:
+    description: 'The list of project identifiers. One line separated by commas'
+    required: true
+  version:
+    description: 'The fix version. Must be created in Jira releases'
+    required: true
+outputs:
+  release_notes:
+    description: 'The list of issues with given fix version in plain text'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.projects }}
+    - ${{ inputs.version }}
+branding:
+  icon: 'activity'
+  color: 'blue'
