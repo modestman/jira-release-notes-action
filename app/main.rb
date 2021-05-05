@@ -42,5 +42,7 @@ notes = result.map do |project|
     list = project.issues.map { |i| "[#{i.id}] - #{i.summary}" }.join("\n")
     "#{project.name}\n\n#{list}\n"
 end
+notes = notes.join("\n")
+escaped_notes = notes.gsub("%", "%25").gsub("\n", "%0A").gsub("\r", "%0D")
 
-puts "::set-output name=release_notes::#{notes.join("\n")}"
+puts "::set-output name=release_notes::#{escaped_notes}"
